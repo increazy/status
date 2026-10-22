@@ -1,6 +1,10 @@
 owner: increazy
 repo: status
 
+# marcados na issue que abre a cada queda: o GitHub manda e-mail ao abrir e ao fechar
+assignees:
+  - leonardovilarinho
+
 sites:
   # ordem = ordem na página. Trocar o "name" zera o histórico do item (o Upptime guarda por nome)
   # APIs: /health/ready responde 200 só com PHP e banco no ar (503 se o banco cair)
