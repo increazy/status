@@ -74,8 +74,8 @@ status-website:
         ['PagBank (PagSeguro)', 'https://status.pagbank.com.br'], ['Cielo', 'https://status.cielo.com.br'],
         ['Efí', 'https://status.sejaefi.com.br'], ['Stripe', 'https://status.stripe.com'],
         ['PayPal', 'https://www.paypal-status.com'], ['Vindi (Yapay)', 'https://status.vindi.com.br'],
-        ['Zoop (Signapay)', 'https://status.zoop.com.br'], ['Appmax', 'https://status.appmax.com.br'],
-        ['Pagaleve', 'https://status.pagaleve.com.br'], ['Apple Pay', 'https://www.apple.com/br/support/systemstatus/']
+        ['Zoop', 'https://status.zoop.com.br'], ['Appmax', 'https://status.appmax.com.br'],
+        ['Pagaleve', 'https://status.pagaleve.com.br']
       ];
       var sites = null;
       fetch('https://raw.githubusercontent.com/increazy/status/master/history/summary.json')
@@ -116,7 +116,7 @@ status-website:
           var sec = document.createElement('section');
           sec.id = 'inc-gateways';
           sec.innerHTML = '<h2>Status dos meios de pagamento</h2><p>Atalhos para as páginas de status dos parceiros integrados.</p><ul>' +
-            GATEWAYS.map(function (g) { return '<li><a href="' + g[1] + '" target="_blank" rel="noopener">' + g[0] + ' ↗</a></li>'; }).join('') + '</ul>';
+            GATEWAYS.map(function (g) { return '<li><a href="' + g[1] + '" target="_blank" rel="noopener">' + g[0] + '</a></li>'; }).join('') + '</ul>';
           list.parentNode.insertBefore(sec, list.nextSibling);
         }
       }
