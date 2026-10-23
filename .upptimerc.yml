@@ -115,7 +115,7 @@ status-website:
         if (!document.getElementById('inc-gateways')) {
           var sec = document.createElement('section');
           sec.id = 'inc-gateways';
-          sec.innerHTML = '<h2>Status dos meios de pagamento</h2><p>Atalhos para as páginas de status dos parceiros integrados.</p><ul>' +
+          sec.innerHTML = '<h2>Status dos meios de pagamento</h2><ul>' +
             GATEWAYS.map(function (g) { return '<li><a href="' + g[1] + '" target="_blank" rel="noopener">' + g[0] + '</a></li>'; }).join('') + '</ul>';
           list.parentNode.insertBefore(sec, list.nextSibling);
         }
