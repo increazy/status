@@ -9,15 +9,20 @@ const WORKFLOWS = [
   ['summary.yml', 7, 4], // disponibilidade %, tempo médio e as barras de 90 dias
 ];
 
-async function dispatch(env, workflow) {
-  const res = await fetch(`https://api.github.com/repos/increazy/status/actions/workflows/${workflow}/dispatches`, {
+// Relatório semanal de consumo por loja (inc usage, repo privado increazy/ecossistema): domingo 06:00 UTC
+// (03:00 Brasília). A cron do GitHub às vezes nem dispara; aqui é o único gatilho dele. Token próprio
+// (GITHUB_TOKEN_ECOSSISTEMA: Actions read/write no ecossistema), porque o GITHUB_TOKEN só enxerga o status.
+const WEEKLY = [['increazy/ecossistema', 'usage-report.yml', 'main', 'GITHUB_TOKEN_ECOSSISTEMA', 0, 6, 0]];
+
+async function dispatch(env, workflow, repo = 'increazy/status', ref = 'master', token = env.GITHUB_TOKEN) {
+  const res = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/${workflow}/dispatches`, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+      Authorization: `Bearer ${token}`,
       Accept: 'application/vnd.github+json',
       'User-Agent': 'increazy-status-cron',
     },
-    body: JSON.stringify({ ref: 'master' }),
+    body: JSON.stringify({ ref }),
   });
   if (res.status !== 204) throw new Error(`${workflow}: GitHub respondeu ${res.status}: ${await res.text()}`);
 }
@@ -27,8 +32,17 @@ export const due = (time) => {
   return WORKFLOWS.filter(([, every, offset]) => minute % every === offset).map(([w]) => w);
 };
 
+// semanais que caem neste minuto (dia da semana, hora e minuto em UTC)
+export const dueWeekly = (time) => {
+  const d = new Date(time);
+  return WEEKLY.filter(([, , , , day, hour, min]) => d.getUTCDay() === day && d.getUTCHours() === hour && d.getUTCMinutes() === min);
+};
+
 export default {
   async scheduled(event, env, ctx) {
-    await Promise.all(due(event.scheduledTime).map((w) => dispatch(env, w)));
+    await Promise.all([
+      ...due(event.scheduledTime).map((w) => dispatch(env, w)),
+      ...dueWeekly(event.scheduledTime).map(([repo, w, ref, tokenName]) => dispatch(env, w, repo, ref, env[tokenName])),
+    ]);
   },
 };
