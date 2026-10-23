@@ -1,12 +1,13 @@
-// O schedule do GitHub Actions atrasa horas em repo gratuito; este cron da Cloudflare dispara os workflows do Upptime.
-// Todos dividem o mesmo grupo de concurrency e o GitHub descarta um pendente quando chega outro: por isso os minutos
-// ficam espaçados (nunca no mesmo minuto da checagem de 5 em 5).
-const WORKFLOWS = {
-  '*/5 * * * *': ['uptime.yml'],
-  '2,12,22,32,42,52 * * * *': ['response-time.yml'], // gráfico de tempo de resposta
-  '4,19,34,49 * * * *': ['graphs.yml'], // gráficos da home
-  '8,23,38,53 * * * *': ['summary.yml'], // disponibilidade % e tempo médio
-};
+// O schedule do GitHub Actions atrasa horas em repo gratuito; este cron da Cloudflare (1x por minuto) dispara os
+// workflows do Upptime. Todos dividem o mesmo grupo de concurrency e o GitHub descarta um pendente quando chega outro:
+// por isso cada um tem um deslocamento (resto) diferente e raramente caem no mesmo minuto.
+// shortcut: 3 no mesmo minuto ainda acontece (~14x por dia) e um deles se perde; a próxima rodada cobre
+const WORKFLOWS = [
+  ['uptime.yml', 5, 0],
+  ['response-time.yml', 6, 1], // gráfico de tempo de resposta
+  ['graphs.yml', 7, 2], // gráficos (página de cada serviço)
+  ['summary.yml', 7, 4], // disponibilidade %, tempo médio e as barras de 90 dias
+];
 
 async function dispatch(env, workflow) {
   const res = await fetch(`https://api.github.com/repos/increazy/status/actions/workflows/${workflow}/dispatches`, {
@@ -21,10 +22,13 @@ async function dispatch(env, workflow) {
   if (res.status !== 204) throw new Error(`${workflow}: GitHub respondeu ${res.status}: ${await res.text()}`);
 }
 
+export const due = (time) => {
+  const minute = Math.round(time / 60000);
+  return WORKFLOWS.filter(([, every, offset]) => minute % every === offset).map(([w]) => w);
+};
+
 export default {
   async scheduled(event, env, ctx) {
-    const workflows = WORKFLOWS[event.cron];
-    if (!workflows) throw new Error(`cron sem workflow: ${event.cron}`);
-    await Promise.all(workflows.map((w) => dispatch(env, w)));
+    await Promise.all(due(event.scheduledTime).map((w) => dispatch(env, w)));
   },
 };
