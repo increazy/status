@@ -3,9 +3,9 @@
 // ficam espaçados (nunca no mesmo minuto da checagem de 5 em 5).
 const WORKFLOWS = {
   '*/5 * * * *': ['uptime.yml'],
-  '2 * * * *': ['response-time.yml'], // 1 ponto por hora no gráfico de tempo de resposta
-  '17 * * * *': ['graphs.yml'], // gráficos da home
-  '32 * * * *': ['summary.yml'], // disponibilidade % e tempo médio
+  '2,12,22,32,42,52 * * * *': ['response-time.yml'], // gráfico de tempo de resposta
+  '4,19,34,49 * * * *': ['graphs.yml'], // gráficos da home
+  '8,23,38,53 * * * *': ['summary.yml'], // disponibilidade % e tempo médio
 };
 
 async function dispatch(env, workflow) {
