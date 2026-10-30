@@ -1,7 +1,7 @@
 url: https://payment.api.increazy.com/health/ready
 status: up
 code: 200
-responseTime: 900
-lastUpdated: 2026-10-30T00:20:35.634Z
+responseTime: 689
+lastUpdated: 2026-10-30T00:25:33.580Z
 startTime: 2026-10-22T18:18:10.706Z
 generator: Upptime <https://github.com/upptime/upptime>
