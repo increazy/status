@@ -23,6 +23,8 @@ sites:
     url: https://checkout.api.increazy.com/health/ready
   - name: API de conexões
     url: https://connect.api.increazy.com/health/ready
+  - name: Filas e workers
+    url: https://connect.api.increazy.com/health/workers
   - name: API do painel
     url: https://dash.api.increazy.com/health/ready
   - name: API de métricas
