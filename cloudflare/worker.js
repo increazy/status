@@ -1,12 +1,13 @@
 // O schedule do GitHub Actions atrasa horas em repo gratuito; este cron da Cloudflare (1x por minuto) dispara os
 // workflows do Upptime. Todos dividem o mesmo grupo de concurrency e o GitHub descarta um pendente quando chega outro:
-// por isso cada um tem um deslocamento (resto) diferente e raramente caem no mesmo minuto.
-// shortcut: 3 no mesmo minuto ainda acontece (~14x por dia) e um deles se perde; a próxima rodada cobre
+// por isso cada um tem um deslocamento (resto) diferente e nunca caem no mesmo minuto.
+// Response time, graphs e summary leem o histórico de commits de cada site pela API: rodar a cada 6-7 min estourava
+// o limite de 5000 chamadas/h do GH_PAT (403 "API rate limit exceeded"). Uptime fica em 5 min (detecta queda).
 const WORKFLOWS = [
   ['uptime.yml', 5, 0],
-  ['response-time.yml', 6, 1], // gráfico de tempo de resposta
-  ['graphs.yml', 7, 2], // gráficos (página de cada serviço)
-  ['summary.yml', 7, 4], // disponibilidade %, tempo médio e as barras de 90 dias
+  ['response-time.yml', 30, 1], // gráfico de tempo de resposta
+  ['graphs.yml', 60, 2], // gráficos (página de cada serviço)
+  ['summary.yml', 15, 4], // disponibilidade %, tempo médio e as barras de 90 dias
 ];
 
 // Relatório semanal de consumo por loja (inc usage, repo privado increazy/ecossistema): domingo 06:00 UTC
