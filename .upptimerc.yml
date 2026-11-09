@@ -29,6 +29,8 @@ sites:
     url: https://dash.api.increazy.com/health/ready
   - name: API de métricas
     url: https://analytics.api.increazy.com/health/ready
+  - name: API de assinaturas
+    url: https://recurrence.api.increazy.com/health/ready
   - name: API de scraper
     url: https://webscraper.increazy.com/healthz
   - name: Minha conta plug & play
