@@ -4,19 +4,19 @@
     "url": "https://increazy.com/healthz",
     "icon": "https://icons.duckduckgo.com/ip3/increazy.com.ico",
     "slug": "lojas",
-    "status": "down",
-    "uptime": "100.00%",
-    "uptimeDay": "99.91%",
-    "uptimeWeek": "99.99%",
-    "uptimeMonth": "100.00%",
-    "uptimeYear": "100.00%",
+    "status": "up",
+    "uptime": "99.99%",
+    "uptimeDay": "99.71%",
+    "uptimeWeek": "99.96%",
+    "uptimeMonth": "99.99%",
+    "uptimeYear": "99.99%",
     "time": 1425,
-    "timeDay": 1359,
-    "timeWeek": 1299,
+    "timeDay": 1346,
+    "timeWeek": 1297,
     "timeMonth": 1425,
     "timeYear": 1425,
     "dailyMinutesDown": {
-      "2026-11-13": 1
+      "2026-11-13": 4
     }
   },
   {
@@ -24,19 +24,19 @@
     "url": "https://checkout.app.increazy.com/increazy-ux/",
     "icon": "https://icons.duckduckgo.com/ip3/checkout.app.increazy.com.ico",
     "slug": "checkout-plug-and-play",
-    "status": "down",
-    "uptime": "100.00%",
-    "uptimeDay": "99.93%",
-    "uptimeWeek": "99.99%",
-    "uptimeMonth": "100.00%",
-    "uptimeYear": "100.00%",
+    "status": "up",
+    "uptime": "99.99%",
+    "uptimeDay": "99.73%",
+    "uptimeWeek": "99.96%",
+    "uptimeMonth": "99.99%",
+    "uptimeYear": "99.99%",
     "time": 358,
     "timeDay": 330,
     "timeWeek": 327,
     "timeMonth": 358,
     "timeYear": 358,
     "dailyMinutesDown": {
-      "2026-11-13": 1
+      "2026-11-13": 4
     }
   },
   {
@@ -44,19 +44,19 @@
     "url": "https://ecommerce.api.increazy.com/health/ready",
     "icon": "https://icons.duckduckgo.com/ip3/ecommerce.api.increazy.com.ico",
     "slug": "api-da-plataforma",
-    "status": "down",
-    "uptime": "100.00%",
-    "uptimeDay": "99.94%",
-    "uptimeWeek": "99.99%",
-    "uptimeMonth": "100.00%",
-    "uptimeYear": "100.00%",
+    "status": "up",
+    "uptime": "99.99%",
+    "uptimeDay": "99.76%",
+    "uptimeWeek": "99.97%",
+    "uptimeMonth": "99.99%",
+    "uptimeYear": "99.99%",
     "time": 784,
-    "timeDay": 894,
-    "timeWeek": 786,
+    "timeDay": 889,
+    "timeWeek": 785,
     "timeMonth": 784,
     "timeYear": 784,
     "dailyMinutesDown": {
-      "2026-11-13": 1
+      "2026-11-13": 3
     }
   },
   {
